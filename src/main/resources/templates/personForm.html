@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registration</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #e4e4e4;
+        background: #121212;
+      }
+      .form-container {
+        background: #0536c6;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        max-width: 500px;
+        width: 100%;
+      }
+      .form-label {
+        color: #e4e4e4;
+      }
+      .form-control {
+        background-color: #2c2c2c;
+        color: #e4e4e4;
+        border: 1px solid #444;
+      }
+      .form-control:focus {
+        border-color: #6200ea;
+        box-shadow: 0 0 0 0.2rem rgba(98, 0, 234, 0.25);
+      }
+      .btn-primary {
+        background-color: #bb86fc;
+        border-color: #6200ea;
+        color: #121212;
+      }
+      .btn-secondary {
+        background-color: #444;
+        color: #e4e4e4;
+      }
+      .text-danger {
+        color: #cf6679 !important;
+        display: block;
+        word-wrap: break-word;
+      }
+      @media (max-width: 576px) {
+        .form-container {
+          padding: 20px;
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1 class="text-center">Registration Page</h1>
+      <form
+        method="POST"
+        th-action="@{/persons/create}"
+        data-th-object="${persons}"
+      >
+        <!-- ID Field -->
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input type="text" name="id" class="form-control" th:field="*{id}" />
+          <span
+            class="text-danger"
+            th:if="${#fields.hasErrors('id')}"
+            th:errors="*{id}"
+          ></span>
+        </div>
+
+        <!-- Name Field -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Fullname</label>
+          <input
+            type="text"
+            name="fullName"
+            class="form-control"
+            th:field="*{fullName}"
+          />
+          <span
+            class="text-danger"
+            th:if="${#fields.hasErrors('fullName')}"
+            th:errors="*{fullName}"
+          ></span>
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            th:field="*{email}"
+          />
+          <span
+            class="text-danger"
+            th:if="${#fields.hasErrors('email')}"
+            th:errors="*{email}"
+          ></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <input class="btn btn-primary" type="submit" value="Create" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
